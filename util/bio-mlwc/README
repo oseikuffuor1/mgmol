@@ -1,0 +1,105 @@
+# This utility generates approximate Maximally Localized Wannier Centers (MLWCs)
+# for modular biological systems (proteins, DNA, and RNA). It takes a .pdb file
+# as input and returns a .xyz file (in Angstroms for visualization) or a .lrs file
+# (in Bohr to input into MGmol). It uses a set of geometric maps for each residue
+# and bond in the system.
+
+# If the map files <protein|DNA|RNA|ligands>_maps.pkl exist and you have not altered the
+# templates, you can simply run the utility using the command
+# python calculate_mlwcs.py <protein|DNA|RNA> <input.pdb> <output.lrs>
+# You can also use command line arguments to set various aspects of the approximation.
+# In order to see these arguments, read the usage tips below and/or pull up the help text using
+# python calculate_mlwcs.py -h
+# Because the utility needs to locate and deserialize the maps, you must run all commands
+# from the bio-mlwc/ directory.
+
+# If the serialized map files do not exist, or alterations have been made to the templates,
+# then the template files must be re-extracted and the maps must be re-generated.
+
+# The following instructions preform this setup. Simply source this file to run setup.
+
+# First, we extract a .pdb file describing each residue and a .xyz file
+# describing its Maximally Localized Wannier Centers (MLWCs) for each residue.
+
+python extract_templates.py protein
+python extract_templates.py DNA
+python extract_templates.py RNA
+
+# Next, we generate a collection of maps for each template pair, where
+# each map is defined by a scaling factor, a vector in a local basis,
+# and the three nearby atom names needed to form that basis.
+
+python generate_maps.py protein
+python generate_maps.py DNA
+python generate_maps.py RNA
+python generate_maps.py ligands
+
+# The above setup commands should only ever need to be run once.
+# After the maps are serialized into <protein|DNA|RNA|ligands>_maps.pkl, they do not
+# need to be recalculated, and you can run the utility using python calculate_mlwcs.py
+
+#------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------
+
+# USAGE TIPS:
+
+# The geometric mappings are robust and effective as long as all expected atoms exist
+# and are named normally. If this is not the case, the mappings may not be applied and no
+# MLWCs may be generated for the unknown atoms, or in some cases extra MLWCs will be
+# generated if the missing atom is not part of the map.
+
+# This means that on a non-ideal input system, this utility may generate too many or
+# too few MLWCs. If this is the case and the output of this utility is feed to MGmol,
+# MGmol will fill in or remove MLWCs sequentially.
+# This may result in portions of the system with no MLWCs or too many MLWCs.
+# Therefore this utility provides some approximations and options to improve the output.
+# It will estimate the system charge from the residue sequence and estimate the
+# number of orbitals needed from the valence of the system. These are very rough estimates,
+# as they rely on the element and name fields in the .pdb file, which are
+# not fully standardized.
+
+# The best way to get an accurate result is to provide the number of MLWCs to generate
+# using the -n/--num-mlwcs option. When MLWC addition and removal options are provided
+# with the -a/--add and -r/--remove flags, this will guarantee that the correct
+# number of MLWCs are generated. The `near` and `far` addition and removal options
+# will generate the most accurate MLWCs, but have O(N*M) complexity where N is the number
+# of atoms and M is the number of MLWCs to add or remove, which is infeasible for very
+# large systems. Thus `random` can be used, which is O(N) and will add or remove MLWCs
+# non-sequentially, distributing error throughout the system rather than concentrating
+# all missing or extra MLWCs in one part of the system. This may yield a better result or
+# be less likely to cause the DFT solver to diverge.
+
+# In order to find the number of MLWCs expected by MGmol given the pseudopotentials
+# used in the simulation, you can run the setup portion of any MGmol run on the
+# system of interest and look for `numst` in the output. Passing this value to the
+# utility with the -n option along with -a and -r options will guarantee the correct
+# number of MLWCs so that MGmol will not have to sequentially add or remove any.
+
+# If you'd like to use the `near` and `far` addition and removal options and the system
+# is mostly ligands, e.g. a protein in a water box, separating the system into two .pdb
+# files, calculating the MLWCs on the protein with -a and -r, and calculating the
+# MLWCs of the ligands separately (they will likely not need -a or -r) will decrease
+# the values of N and M, making the O(N*M) scaling more manageable. The results can then
+# be combined to give MLWCs for the whole system.
+
+# If you'd like to add maps for any additional ligand templates so that the utility can
+# provide geometric MLWCs, simply add a directory X/ containing X.pdb and X-mlwc.xyz to
+# bio-mlwc/ligands/template_files where `X` is the residue name given to the ligand
+# in the system .pdb file. X.pdb and X-mlwc.xyz should contain only the atoms and MLWCs
+# of the single ligand, respectively. If you'd like to apply the ligand map to
+# residues with equivalent names, add the ligand and its equivalent residue names to the
+# ligand_res_dict in calculate_mlwcs.py::ligand_res_name. If the ligand does not always
+# use the atom names given in the template and you'd like to apply the
+# ligand map to atoms with equivalent names, you may have to add a new equivalence
+# rule to calculate_mlwcs.py::equiv_names.
+
+# To run a test of this utility and check its accuracy on a 4-residue peptide system,
+# go to the bio-mlwc/test/ directory and run `python test.py`.
+
+# To see an example of how a geometric initial guess can be generated and used in
+# quench to prepare for MD, go to mgmol/examples/4QXX/.
+
+
+
+
+# Paul Beckman, pbeckman@uchicago.edu, 9/12/2017

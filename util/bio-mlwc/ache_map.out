@@ -1,0 +1,108 @@
+
+Deserializing map files protein/protein_maps.pkl and ligands/ligands_maps.pkl
+
+Reading atoms from file ../../examples/ACHE_soman/soman_ACHE_ionized.pdb
+  56220 atoms read
+
+Separating out ligand atoms by residue name
+  47901 ligand atoms found, leaving 8319 atoms in the biological system
+
+Calculating MLWCs for biological system
+WARNING - atom HG not found in residue CYS number 69
+WARNING - atom HG not found in residue CYS number 96
+WARNING - unknown residue SSON number 203, no MLWCs mapped
+WARNING - atom HG not found in residue CYS number 257
+WARNING - atom HG not found in residue CYS number 272
+WARNING - atom HG not found in residue CYS number 409
+WARNING - atom HG not found in residue CYS number 529
+WARNING - unknown residue CLA number 80, no MLWCs mapped
+WARNING - unknown residue CLA number 81, no MLWCs mapped
+WARNING - unknown residue CLA number 82, no MLWCs mapped
+WARNING - unknown residue CLA number 83, no MLWCs mapped
+WARNING - unknown residue CLA number 84, no MLWCs mapped
+WARNING - unknown residue CLA number 85, no MLWCs mapped
+WARNING - unknown residue CLA number 86, no MLWCs mapped
+WARNING - unknown residue CLA number 87, no MLWCs mapped
+WARNING - unknown residue CLA number 88, no MLWCs mapped
+WARNING - unknown residue CLA number 89, no MLWCs mapped
+WARNING - unknown residue CLA number 90, no MLWCs mapped
+WARNING - unknown residue CLA number 91, no MLWCs mapped
+WARNING - unknown residue CLA number 92, no MLWCs mapped
+WARNING - unknown residue CLA number 93, no MLWCs mapped
+WARNING - unknown residue CLA number 94, no MLWCs mapped
+WARNING - unknown residue CLA number 95, no MLWCs mapped
+WARNING - unknown residue CLA number 96, no MLWCs mapped
+WARNING - unknown residue CLA number 97, no MLWCs mapped
+WARNING - unknown residue CLA number 98, no MLWCs mapped
+WARNING - unknown residue CLA number 99, no MLWCs mapped
+WARNING - unknown residue CLA number 100, no MLWCs mapped
+WARNING - unknown residue CLA number 101, no MLWCs mapped
+WARNING - unknown residue CLA number 102, no MLWCs mapped
+WARNING - unknown residue CLA number 103, no MLWCs mapped
+WARNING - unknown residue CLA number 104, no MLWCs mapped
+WARNING - unknown residue CLA number 105, no MLWCs mapped
+WARNING - unknown residue CLA number 106, no MLWCs mapped
+WARNING - unknown residue CLA number 107, no MLWCs mapped
+WARNING - unknown residue CLA number 108, no MLWCs mapped
+WARNING - unknown residue CLA number 109, no MLWCs mapped
+WARNING - unknown residue CLA number 110, no MLWCs mapped
+WARNING - unknown residue CLA number 111, no MLWCs mapped
+WARNING - unknown residue CLA number 112, no MLWCs mapped
+WARNING - unknown residue CLA number 113, no MLWCs mapped
+WARNING - unknown residue CLA number 114, no MLWCs mapped
+WARNING - unknown residue CLA number 115, no MLWCs mapped
+WARNING - unknown residue CLA number 116, no MLWCs mapped
+WARNING - unknown residue CLA number 117, no MLWCs mapped
+WARNING - unknown residue CLA number 118, no MLWCs mapped
+WARNING - unknown residue CLA number 119, no MLWCs mapped
+WARNING - unknown residue CLA number 120, no MLWCs mapped
+WARNING - unknown residue CLA number 121, no MLWCs mapped
+WARNING - unknown residue CLA number 122, no MLWCs mapped
+WARNING - unknown residue CLA number 123, no MLWCs mapped
+WARNING - unknown residue CLA number 124, no MLWCs mapped
+WARNING - unknown residue CLA number 125, no MLWCs mapped
+WARNING - unknown residue CLA number 126, no MLWCs mapped
+WARNING - unknown residue CLA number 127, no MLWCs mapped
+WARNING - unknown residue CLA number 128, no MLWCs mapped
+WARNING - unknown residue CLA number 129, no MLWCs mapped
+WARNING - unknown residue CLA number 130, no MLWCs mapped
+WARNING - unknown residue CLA number 131, no MLWCs mapped
+WARNING - unknown residue CLA number 132, no MLWCs mapped
+WARNING - unknown residue CLA number 133, no MLWCs mapped
+WARNING - unknown residue CLA number 134, no MLWCs mapped
+WARNING - unknown residue CLA number 135, no MLWCs mapped
+WARNING - unknown residue CLA number 136, no MLWCs mapped
+WARNING - unknown residue CLA number 137, no MLWCs mapped
+WARNING - unknown residue CLA number 138, no MLWCs mapped
+WARNING - unknown residue CLA number 139, no MLWCs mapped
+WARNING - unknown residue CLA number 140, no MLWCs mapped
+WARNING - unknown residue CLA number 141, no MLWCs mapped
+WARNING - unknown residue CLA number 142, no MLWCs mapped
+WARNING - unknown residue CLA number 143, no MLWCs mapped
+WARNING - unknown residue CLA number 144, no MLWCs mapped
+WARNING - unknown residue CLA number 145, no MLWCs mapped
+WARNING - unknown residue CLA number 146, no MLWCs mapped
+WARNING - unknown residue CLA number 147, no MLWCs mapped
+WARNING - unknown residue CLA number 148, no MLWCs mapped
+WARNING - unknown residue CLA number 149, no MLWCs mapped
+WARNING - unknown residue CLA number 150, no MLWCs mapped
+WARNING - unknown residue CLA number 151, no MLWCs mapped
+  11454 MLWCs generated by geometric mapping for the biological system
+
+Calculating MLWCs for ligands
+  63998 MLWCs generated by geometric mapping for ligands
+
+75452 MLWCs generated in total by geometric mapping
+
+Adding atom-centered MLWCs or removing geometrically-generated MLWCs if necessary
+  system charge: 0 (given by user)
+  MLWCs needed:  75911 (given by user)
+  MLWC addition method: None
+  MLWC removal method:  None
+
+0 MLWCs were automatically added
+
+There are 459 too few MLWCs in the output. Specify an addition method with -a to generate the correct number of MLWCs.
+
+Writing output to ache_mlwc_geom.xyz
+
